@@ -1,0 +1,11 @@
+mqtt:
+  uris: tcp://bemfa.com:9501
+  clientId: 94bb04d4a5c89e128d224f8d408a0f88
+  topics:
+    - cartoonInform
+    - realityInform
+  username:
+  password:
+  timeout: 30
+  keepalive: 60
+  qos: 0
