@@ -39,7 +39,7 @@ public class PhotoForwardController {
         log.info(finalPath);
         photo.transferTo(new File(finalPath));
         mqttGateWay.sendToMqtt("realityInform",filename);
-        webSocket.sendOneMessage("jetson",filename);
+        webSocket.sendOneMessage("jetson","client:" + filename);
         return "success";
     }
 
@@ -84,5 +84,11 @@ public class PhotoForwardController {
         ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(bytes, headers, HttpStatus.OK);
         is.close();
         return responseEntity;
+    }
+
+    @RequestMapping("/cameraCatch")
+    public String cameraCatch(){
+        webSocket.sendOneMessage("jetson","camera:");
+        return "success";
     }
 }

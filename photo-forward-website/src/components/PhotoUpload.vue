@@ -1,4 +1,5 @@
 <template>
+    <div>
     <el-upload
     class="upload-demo"
     ref="upload"
@@ -11,6 +12,8 @@
     <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
     <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
     </el-upload>
+    <el-button type="primary" @click="camera" size="medium">使用Jetson板载摄像头捕捉人脸</el-button>
+    </div>
 </template>
 
 <script>
@@ -21,13 +24,13 @@ export default {
         filename:''
       };
     },
-    mounted(){
-      //this.connectWebsocket()
+    created(){
+      this.connectWebsocket()
     },
     methods: {
       submitUpload() {
         this.$refs.upload.submit();
-        this.connectWebsocket()
+        //this.connectWebsocket()
       },
       handleRemove(file, fileList) {
         console.log(file, fileList);
@@ -90,6 +93,16 @@ export default {
             console.log("websocket关闭：", evt);
           };
         }
+      },
+      camera(){
+        this.axios.get("/cameraCatch", {
+          responseType: 'blob', // 切记类型 blob
+      }).then((res) => {
+          console.log(res);
+        }
+      ).catch((err) => {
+          console.log(err);
+      });
       }
     }
 }

@@ -10,11 +10,11 @@ import os
 # CSI-0
 camera0 = CSICamera(capture_device=0, width=640, height=720)
 image0 = camera0.read()
-cv2.imwrite("/home/gaoyuan/GAN/test/val/1.jpg", image0)  # 存图像
+cv2.imwrite("/home/gaoyuan/GAN/test/val/reality.jpg", image0)  # 存图像
 
 
 # Load the jpg file into a numpy array
-image = face_recognition.load_image_file("/home/gaoyuan/GAN/test/val/1.jpg")
+image = face_recognition.load_image_file("/home/gaoyuan/GAN/test/val/reality.jpg")
 
 # Find all the faces in the image using the default HOG-based model.
 # This method is fairly accurate, but not as accurate as the CNN model and not GPU accelerated.
@@ -23,8 +23,8 @@ image = face_recognition.load_image_file("/home/gaoyuan/GAN/test/val/1.jpg")
 face_locations = face_recognition.face_locations(image)
 while len(face_locations) == 0:
     image0 = camera0.read()
-    cv2.imwrite("/home/gaoyuan/GAN/test/val/1.jpg", image0)  # 存图像
-    image = face_recognition.load_image_file("/home/gaoyuan/GAN/test/val/1.jpg")
+    cv2.imwrite("/home/gaoyuan/GAN/test/val/reality.jpg", image0)  # 存图像
+    image = face_recognition.load_image_file("/home/gaoyuan/GAN/test/val/reality.jpg")
     face_locations = face_recognition.face_locations(image)
     print("No face found. Please try again.")
     time.sleep(0.5)
@@ -39,7 +39,7 @@ for face_location in face_locations:
     # You can access the actual face itself like this:
     face_image = image[0:512, left:right]
     pil_image = Image.fromarray(face_image)
-    pil_image.save("/home/gaoyuan/GAN/test/val/1.jpg")
+    pil_image.save("/home/gaoyuan/GAN/test/reality.jpg")
     break
 
 if len(face_locations) >= 1:
