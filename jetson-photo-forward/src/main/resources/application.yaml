@@ -1,11 +1,15 @@
-mqtt:
-  uris: tcp://bemfa.com:9501
-  clientId: 94bb04d4a5c89e128d224f8d408a0f88
-  topics:
-    - cartoonInform
-    - realityInform
-  username:
-  password:
-  timeout: 30
-  keepalive: 60
-  qos: 0
+http:
+  port: 80
+
+server:
+  port: 443
+  ssl:
+    key-store: classpath:10013290_www.gaoyuanwang.top.pfx
+    key-store-password: 21g6np8i
+    key-store-type: PKCS12
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB

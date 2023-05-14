@@ -48,7 +48,7 @@ cd ../
 ```
 pip3 install 'pillow<7'
 ```
-* 安装opencv4.2.0，下载源代码包，[教程](https://blog.csdn.net/qq_43448818/article/details/126712923)
+* https://opencv.org/releases/ 安装opencv4.2.0，下载源代码包，[教程](https://blog.csdn.net/qq_43448818/article/details/126712923)
 ```
 sudo apt-get install cmake
 unzip opencv-4.2.0.zip

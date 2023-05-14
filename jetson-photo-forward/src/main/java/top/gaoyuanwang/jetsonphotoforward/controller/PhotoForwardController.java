@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import top.gaoyuanwang.jetsonphotoforward.service.MqttGateway;
 import top.gaoyuanwang.jetsonphotoforward.utils.WebSocket;
 
 import javax.annotation.Resource;
@@ -22,9 +21,6 @@ import java.io.IOException;
 @RestController
 @Slf4j
 public class PhotoForwardController {
-
-    @Resource
-    private MqttGateway mqttGateWay;
     @Resource
     private WebSocket webSocket;
 
@@ -38,7 +34,6 @@ public class PhotoForwardController {
         String finalPath = path + File.separator + filename;
         log.info(finalPath);
         photo.transferTo(new File(finalPath));
-        mqttGateWay.sendToMqtt("realityInform",filename);
         webSocket.sendOneMessage("jetson","client:" + filename);
         return "success";
     }
@@ -67,7 +62,6 @@ public class PhotoForwardController {
         if(!file.exists()) file.mkdir();
         String finalPath = path + File.separator + filename;
         photo.transferTo(new File(finalPath));
-        mqttGateWay.sendToMqtt("cartoonInform",filename);
         webSocket.sendOneMessage("user",filename);
         return "success";
     }
